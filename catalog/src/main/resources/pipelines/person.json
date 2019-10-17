@@ -1,0 +1,28 @@
+{
+    "processors": [
+      {
+        "grok": {
+          "field": "tmp_csv_line",
+          "patterns": [
+            "%{NUMBER:tmp_doc_id},%{DATA:name},%{DATA:email},%{NUMBER:age}"
+          ]
+        }
+      },
+      {
+        "set" : {
+          "field" : "_id",
+          "value" : "{{tmp_doc_id}}"
+        }
+      },
+      {
+        "remove": {
+          "field": "tmp_csv_line"
+        }
+      },
+      {
+        "remove": {
+          "field": "tmp_doc_id"
+        }
+      }
+    ]
+}

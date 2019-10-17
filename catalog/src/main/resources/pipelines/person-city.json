@@ -1,0 +1,40 @@
+{
+  "processors": [
+    {
+      "grok": {
+        "field": "tmp_csv_line",
+        "patterns": [
+          "%{NUMBER:tmp_parent_id},%{DATA:city},%{GREEDYDATA:date}"
+        ]
+      }
+    },
+    {
+      "set" : {
+        "field" : "_routing",
+        "value" : "{{tmp_parent_id}}"
+      }
+    },
+    {
+      "set" : {
+        "field" : "visited.name",
+        "value" : "visit"
+      }
+    },
+    {
+      "set" : {
+        "field" : "visited.parent",
+        "value" : "{{tmp_parent_id}}"
+      }
+    },
+    {
+      "remove": {
+        "field": "tmp_csv_line"
+      }
+    },
+    {
+      "remove": {
+        "field": "tmp_parent_id"
+      }
+    }
+  ]
+}

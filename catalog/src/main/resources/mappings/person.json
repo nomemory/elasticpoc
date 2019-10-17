@@ -1,0 +1,13 @@
+{
+  "properties" : {
+    "name" : { "type" : "keyword" },
+    "email" : { "type" : "keyword" },
+    "age"  : { "type" : "long" },
+    "visited" : {
+      "type" : "join",
+      "relations" : {
+        "visitor" : "visit"
+      }
+    }
+  }
+}

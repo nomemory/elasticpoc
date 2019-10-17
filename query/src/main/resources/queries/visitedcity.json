@@ -1,0 +1,12 @@
+{
+    "bool" : {
+      "must" : [
+        { "match" : { "name" : "#{name}" } },
+        { "has_child" : {
+          "type" : "visit",
+          "query" : {
+            "match" : { "city" : "#{city}" }}
+        }}
+      ]
+    }
+}
