@@ -61,4 +61,16 @@ A similar output should appear:
 }
 ```
 
-  
+### Have some data generated
+
+Change directory to the datagen/ module, and run the gradle task in the that folder:
+
+```
+gradle run
+```
+
+Two files `people.csv` and `people_cities.csv` will be generated.
+
+### Open all the microservices
+
+
