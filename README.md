@@ -1,8 +1,6 @@
 # elasticpoc
 
----
-
-## Getting started
+## Run the POC
 
 ### Use the right elasticsearch image
 
@@ -63,3 +61,4 @@ A similar output should appear:
 }
 ```
 
+  
