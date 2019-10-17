@@ -6,7 +6,7 @@
 
 Check if `docker.elastic.co/elasticsearch/elasticsearch 7.3.2` is available as docker image:
 
-```sh
+```
 docker images
 ```
 
@@ -73,4 +73,44 @@ Two files `people.csv` and `people_cities.csv` will be generated.
 
 ### Open all the microservices
 
+All the microservices can be opened with the associated gradle task (gradle can be run directly from `elasticpoc/`):
+
+| Microservice | Gradle | Swagger URL |
+| ------------ | ------ | ------- |
+| Catalog | `gradle :catalog:bootRun`| http://localhost:8081/swagger-ui.html |
+| Query | `gradle :query:bootRun` | http://localhost:8083/swagger-ui.html |
+| Store | `gradle :store:bootRun` | http://localhost:8082/swagger-ui.html |
+
+### Setting up a clean elasticsearch setup
+
+To clear and recreate every indices, mappings and pipelines in elastic it's recommended to call the `/setup/` rest controller.
+
+```
+curl -X GET "http://localhost:8081/setup/" -H "accept: */*"
+```
+
+After succesfuly running this we have:
+* Created the `person` mapping;
+* Created the pipelines to load `person`(s) and `person-cities` associations.
+
+### Loading the initial sets of data
+
+To insert the data we generated at the previous step we can use the swagger interface:
+http://localhost:8082/swagger-ui.html#/store-controller/insertBulkUsingPOST
+
+Or we can `curl` to make the request:
+
+```
+curl -X POST "http://localhost:8082/insert/bulk/person/person-pipeline" -H "accept: */*" -H "Content-Type: multipart/form-data" -F "file=@people.csv;type=text/csv"
+```
+
+and 
+
+```
+curl -X POST "http://localhost:8082/insert/bulk/person/person-city-pipeline" -H "accept: */*" -H "Content-Type: multipart/form-data" -F "file=@people_cities.csv;type=text/csv"
+```
+
+### Querying
+
+Testing if a person visited a city:
 
