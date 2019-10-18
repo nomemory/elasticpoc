@@ -112,5 +112,13 @@ curl -X POST "http://localhost:8082/insert/bulk/person/person-city-pipeline" -H 
 
 ### Querying
 
-Testing if a person visited a city:
+To test if a person visited a city you can use the swagger interface:
+http://localhost:8083/swagger-ui.html#/query-controller/visitedUsingPOST
 
+Or a direct curl:
+
+```
+curl -X POST "http://localhost:8083/query/visited" -H "accept: */*" -H "Content-Type: application/json" -d "{ \"city\": \"Jerusalem\", \"name\": \"Raphael Grout\"}"
+```
+
+(Because different data can be generated, please use correct query entries)
