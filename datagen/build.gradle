@@ -1,5 +1,16 @@
 plugins {
     id 'java'
+    id "application"
+}
+
+apply plugin: "java"
+
+ext {
+    javaMainClass = "DataGenerator"
+}
+
+application {
+    mainClassName = javaMainClass
 }
 
 group 'net.andreinc.elasticpoc'

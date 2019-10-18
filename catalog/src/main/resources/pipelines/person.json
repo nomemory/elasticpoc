@@ -10,6 +10,12 @@
       },
       {
         "set" : {
+          "field" : "visited.name",
+          "value" : "visitor"
+        }
+      },
+      {
+        "set" : {
           "field" : "_id",
           "value" : "{{tmp_doc_id}}"
         }
